@@ -3,6 +3,7 @@ class AdminPanel {
     constructor() {
         this.token = localStorage.getItem('adminToken');
         this.currentSection = 'dashboard';
+        this.currentUser = null;
         this.init();
     }
 
@@ -48,6 +49,12 @@ class AdminPanel {
         // Media upload
         document.getElementById('mediaUpload').addEventListener('change', (e) => this.handleMediaUpload(e));
 
+        // User management
+        document.getElementById('addUserBtn').addEventListener('click', () => this.showUserModal());
+        document.getElementById('closeUserModal').addEventListener('click', () => this.hideUserModal());
+        document.getElementById('cancelUser').addEventListener('click', () => this.hideUserModal());
+        document.getElementById('userForm').addEventListener('submit', (e) => this.handleUserSubmit(e));
+
         // Browse image buttons
         document.querySelectorAll('.browseImageBtn').forEach(btn => {
             btn.addEventListener('click', (e) => this.browseImage(e));
@@ -61,6 +68,9 @@ class AdminPanel {
         document.getElementById('serviceModal').addEventListener('click', (e) => {
             if (e.target.id === 'serviceModal') this.hideServiceModal();
         });
+        document.getElementById('userModal').addEventListener('click', (e) => {
+            if (e.target.id === 'userModal') this.hideUserModal();
+        });
     }
 
     async checkAuth() {
@@ -72,8 +82,10 @@ class AdminPanel {
         try {
             const response = await this.apiCall('/api/auth/verify', 'GET');
             if (response.valid) {
+                this.currentUser = response.user;
                 this.showAdminDashboard();
                 this.loadDashboardData();
+                this.setupRoleBasedUI();
             } else {
                 this.showLoginScreen();
             }
@@ -104,11 +116,11 @@ class AdminPanel {
             });
 
             this.token = response.token;
-            localStorage.setItem('adminToken', this.token);
-            document.getElementById('adminUsername').textContent = response.user.username;
-            
+            this.currentUser = response.user;
+            localStorage.setItem('adminToken', this.token);            
             this.showAdminDashboard();
             this.loadDashboardData();
+            this.setupRoleBasedUI();
             this.showToast('Login successful!', 'success');
 
         } catch (error) {
@@ -124,8 +136,22 @@ class AdminPanel {
     handleLogout() {
         localStorage.removeItem('adminToken');
         this.token = null;
+        this.currentUser = null;
         this.showLoginScreen();
         this.showToast('Logged out successfully', 'info');
+    }
+
+    setupRoleBasedUI() {
+        if (!this.currentUser) return;
+
+        const userManagementNav = document.getElementById('userManagementNav');
+        
+        // Show/hide user management based on role
+        if (this.currentUser.role === 'admin') {
+            userManagementNav.classList.remove('hidden');
+        } else {
+            userManagementNav.classList.add('hidden');
+        }
     }
 
     showLoginScreen() {
@@ -177,6 +203,9 @@ class AdminPanel {
                 break;
             case 'media':
                 this.loadMediaFiles();
+                break;
+            case 'users':
+                this.loadUsers();
                 break;
         }
 
@@ -387,16 +416,14 @@ class AdminPanel {
 
     async loadContactInfo() {
         try {
-            const contact = await this.apiCall('/api/admin/contact', 'GET');
-            
+            const contact = await this.apiCall('/api/admin/contact', 'GET');            
             document.getElementById('contactTitle').value = contact.title;
             document.getElementById('contactEmail').value = contact.email;
             document.getElementById('contactAddress').value = contact.address;
-            document.getElementById('contactPhones').value = contact.phone.join('\n');
+            document.getElementById('contactPhones').value = (contact.phone ? Object.values(contact.phone) : []).join('\n');
             document.getElementById('contactFacebook').value = contact.social.facebook || '';
             document.getElementById('contactTwitter').value = contact.social.twitter || '';
             document.getElementById('contactTiktok').value = contact.social.tiktok || '';
-
         } catch (error) {
             this.showToast('Error loading contact info', 'error');
         }
@@ -750,6 +777,222 @@ class AdminPanel {
         return await response.json();
     }
 
+    // User Management Methods
+    async loadUsers() {
+        try {
+            const users = await this.apiCall('/api/users', 'GET');
+            const container = document.getElementById('usersList');
+            
+            if (users.length === 0) {
+                container.innerHTML = '<p class="text-gray-500 text-center py-8">No users found. Add your first user!</p>';
+                return;
+            }
+
+            container.innerHTML = users.map(user => `
+                <div class="border border-gray-200 rounded-lg p-6 hover:shadow-md transition duration-300">
+                    <div class="flex flex-col md:flex-row items-start justify-between gap-4">
+                        <div class="w-full flex md:hidden  justify-center">
+                            <div class="flex w-24 h-24 bg-primary rounded-full items-center justify-center text-white font-bold">
+                                ${user.firstName ? user.firstName.charAt(0).toUpperCase() : user.username.charAt(0).toUpperCase()}
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="hidden md:flex w-12 h-12 bg-primary rounded-full items-center justify-center text-white font-bold">
+                                    ${user.firstName ? user.firstName.charAt(0).toUpperCase() : user.username.charAt(0).toUpperCase()}
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900">
+                                    ${user.firstName} ${user.lastName}
+                                </h3>
+                                <p class="text-sm text-gray-600">
+                                    @${user.username}
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                                        user.role === 'admin' 
+                                            ? 'bg-red-100 text-red-800' 
+                                            : 'bg-blue-100 text-blue-800'
+                                    }">
+                                        ${user.role === 'admin' ? 'Admin' : 'User'}
+                                    </span>
+                                </p>
+                                
+                                <p class="text-sm text-gray-600">${user.email}</p>
+                                <div class="flex items-center space-x-2 mt-1">
+                                    
+                                    ${user.lastLogin ? 
+                                        `<span class="text-xs text-gray-500">
+                                            Last login: ${new Date(user.lastLogin).toLocaleString("en-US", {
+                                                year: "numeric",
+                                                month: "2-digit",
+                                                day: "2-digit",
+                                                hour: "2-digit",
+                                                minute: "2-digit",
+                                                second: "2-digit"
+                                                })}
+                                            </span>
+                                            ` : 
+                                        '<span class="text-xs text-gray-500">Never logged in</span>'
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-start gap-2 md:gap-0 md:flex-row md:space-x-2 md:items-center">
+                            <button onclick="admin.editUser('${user.id}')" 
+                                    class="text-sm bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300">
+                                <i class="fas fa-edit mr-1"></i>Edit
+                            </button>
+                            <button onclick="admin.resetUserPassword('${user.id}')" 
+                                    class="text-sm bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition duration-300">
+                                <i class="fas fa-key mr-1"></i>Reset Password
+                            </button>
+                            ${user.id !== this.currentUser.id ? 
+                                `<button onclick="admin.deleteUser('${user.id}')" 
+                                        class="text-sm bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300">
+                                    <i class="fas fa-trash mr-1"></i>Delete
+                                </button>` : ''
+                            }
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+        } catch (error) {
+            this.showToast('Error loading users', 'error');
+        }
+    }
+
+    showUserModal(userId = null) {
+        const modal = document.getElementById('userModal');
+        const title = document.getElementById('userModalTitle');
+        const form = document.getElementById('userForm');
+        const passwordFields = document.getElementById('passwordFields');
+        
+        if (userId) {
+            title.textContent = 'Edit User';
+            passwordFields.style.display = 'none';
+            document.getElementById('userPassword').required = false;
+            this.loadUserData(userId);
+        } else {
+            title.textContent = 'Add New User';
+            passwordFields.style.display = 'block';
+            document.getElementById('userPassword').required = true;
+            form.reset();
+            document.getElementById('userId').value = '';
+        }
+        
+        modal.classList.remove('hidden');
+    }
+
+    hideUserModal() {
+        document.getElementById('userModal').classList.add('hidden');
+    }
+
+    async loadUserData(userId) {
+        try {
+            const user = await this.apiCall(`/api/users/${userId}`, 'GET');
+            
+            document.getElementById('userId').value = user.id;
+            document.getElementById('userUsername').value = user.username;
+            document.getElementById('userRole').value = user.role;
+            document.getElementById('userEmail').value = user.email;
+            document.getElementById('userFirstName').value = user.firstName;
+            document.getElementById('userLastName').value = user.lastName;
+
+        } catch (error) {
+            this.showToast('Error loading user data', 'error');
+        }
+    }
+
+    async handleUserSubmit(e) {
+        e.preventDefault();
+        
+        const userId = document.getElementById('userId').value;
+        const userData = {
+            username: document.getElementById('userUsername').value,
+            role: document.getElementById('userRole').value,
+            email: document.getElementById('userEmail').value,
+            firstName: document.getElementById('userFirstName').value,
+            lastName: document.getElementById('userLastName').value
+        };
+
+        // Add password for new users
+        if (!userId) {
+            userData.password = document.getElementById('userPassword').value;
+        }
+
+        try {
+            let resp;
+            if (userId) {
+                resp = await this.apiCall(`/api/users/${userId}`, 'PUT', userData);
+                if (resp && resp.otpId) {
+                    const code = prompt('Enter the 6-digit OTP sent to the admin email:');
+                    if (!code) return;
+                    await this.apiCall('/api/users/verify/update-admin', 'POST', { otpId: resp.otpId, code: String(code).trim() });
+                    this.showToast('Admin updated successfully after OTP!', 'success');
+                } else {
+                    this.showToast('User updated successfully!', 'success');
+                }
+            } else {
+                resp = await this.apiCall('/api/users', 'POST', userData);
+                if (resp && resp.otpId) {
+                    const code = prompt('Enter the 6-digit OTP sent to the admin email:');
+                    if (!code) return;
+                    await this.apiCall('/api/users/verify/create-admin', 'POST', { otpId: resp.otpId, code: String(code).trim() });
+                    this.showToast('Admin created successfully after OTP!', 'success');
+                } else {
+                    this.showToast('User created successfully!', 'success');
+                }
+            }
+
+            this.hideUserModal();
+            this.loadUsers();
+
+        } catch (error) {
+            this.showToast('Error saving user', 'error');
+        }
+    }
+
+    async editUser(userId) {
+        this.showUserModal(userId);
+    }
+
+    async deleteUser(userId) {
+        if (!confirm('Are you sure you want to delete this user? This action cannot be undone.')) return;
+
+        try {
+            await this.apiCall(`/api/users/${userId}`, 'DELETE');
+            this.showToast('User deleted successfully!', 'success');
+            this.loadUsers();
+
+        } catch (error) {
+            this.showToast('Error deleting user', 'error');
+        }
+    }
+
+    async resetUserPassword(userId) {
+        const newPassword = prompt('Enter new password for this user (min 8 characters):');
+        if (!newPassword) return;
+
+        if (newPassword.length < 8) {
+            this.showToast('Password must be at least 8 characters long', 'error');
+            return;
+        }
+
+        try {
+            const resp = await this.apiCall(`/api/users/${userId}/password`, 'PUT', { newPassword });
+            if (resp && resp.otpId) {
+                const code = prompt('Enter the 6-digit OTP sent to the admin email:');
+                if (!code) return;
+                await this.apiCall('/api/users/verify/update-admin-password', 'POST', { otpId: resp.otpId, code: String(code).trim() });
+                this.showToast('Admin password updated successfully after OTP!', 'success');
+            } else {
+                this.showToast('Password reset successfully!', 'success');
+            }
+
+        } catch (error) {
+            this.showToast('Error resetting password', 'error');
+        }
+    }
+
     showToast(message, type = 'info') {
         const container = document.getElementById('toastContainer');
         const toast = document.createElement('div');
@@ -778,7 +1021,7 @@ class AdminPanel {
 
         setTimeout(() => {
             toast.remove();
-        }, 5000);
+        }, 3000);
     }
 }
 

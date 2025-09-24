@@ -2,15 +2,13 @@
   "title": "UTC IT Solution",
   "email": "info@utcitsolution.com",
   "address": "Chan Mya Tharsi Tsp, Mandalay",
-  "phone": [
-    "09-962623062",
-    "09-774143491",
-    "09-781261391"
-  ],
+  "phone": {
+    "0": "09-962623062",
+    "1": "09-774143491"
+  },
   "social": {
     "facebook": "https://www.facebook.com/utcitsolution",
     "twitter": "https://twitter.com/utcitsolution",
     "tiktok": "https://tiktok.com/utcitsolution"
   }
 }
-

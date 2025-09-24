@@ -25,5 +25,17 @@
       "Motherboard ",
       "Ports"
     ]
+  },
+  {
+    "id": "1758723909795",
+    "title": "Course Title",
+    "level": "Basic",
+    "image": "/uploads/image-1758723129035-809728049.png",
+    "alt": "Course Title",
+    "outlines": [
+      "outline",
+      "outline",
+      "outline"
+    ]
   }
 ]

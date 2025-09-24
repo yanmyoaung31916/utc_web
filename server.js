@@ -9,7 +9,8 @@ require('dotenv').config();
 const authRoutes = require('./routes/auth');
 const adminRoutes = require('./routes/admin');
 const uploadRoutes = require('./routes/upload');
-const { authenticateToken } = require('./middleware/auth');
+const userRoutes = require('./routes/users');
+const { authenticateToken, validateInput } = require('./middleware/auth');
 const crypto = require('crypto');
 
 const app = express();
@@ -36,9 +37,22 @@ app.use(cors({
   credentials: true
 }));
 
-// Body parsing middleware
-app.use(express.json({ limit: '10mb' }));
+// Body parsing middleware with enhanced security
+app.use(express.json({ 
+  limit: '10mb',
+  verify: (req, res, buf) => {
+    // Basic JSON parsing protection
+    try {
+      JSON.parse(buf);
+    } catch (e) {
+      throw new Error('Invalid JSON');
+    }
+  }
+}));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// Input validation middleware
+app.use(validateInput);
 
 // Static files
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -76,6 +90,7 @@ const createDataDir = async () => {
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/users', userRoutes);
 
 // Simple analytics store in JSON
 const analyticsFile = path.join(__dirname, 'data', 'analytics.json');
