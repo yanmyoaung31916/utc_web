@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UTC Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#2563eb",
+              secondary: "#1d4ed8",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .sidebar-transition {
+        transition: transform 0.3s ease-in-out;
+      }
+      .fade-in {
+        animation: fadeIn 0.3s ease-in-out;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .loading {
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <!-- Login Screen -->
+    <div
+      id="loginScreen"
+      class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-600 to-blue-800"
+    >
+      <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md">
+        <div class="text-center mb-8">
+          <div
+            class="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4"
+          >
+            <img src="/UTC_IT_Solution.png" alt="Universal Technology Logo" />
+          </div>
+          <h1 class="text-2xl font-bold text-gray-900">UTC Admin Panel</h1>
+          <p class="text-gray-600 mt-2">Sign in to manage your content</p>
+        </div>
+
+        <form id="loginForm" class="space-y-6">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2"
+              >Username</label
+            >
+            <input
+              type="text"
+              id="username"
+              required
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+            />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2"
+              >Password</label
+            >
+            <input
+              type="password"
+              id="password"
+              required
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+            />
+          </div>
+          <button
+            type="submit"
+            id="loginBtn"
+            class="w-full bg-primary text-white py-3 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center justify-center"
+          >
+            <span id="loginText">Sign In</span>
+            <i id="loginSpinner" class="fas fa-spinner loading ml-2 hidden"></i>
+          </button>
+        </form>
+
+        <div
+          id="loginError"
+          class="mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded hidden"
+        ></div>
+      </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="adminDashboard" class="hidden">
+      <!-- Header -->
+      <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="px-6 py-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+              <button
+                id="sidebarToggle"
+                class="lg:hidden text-gray-600 hover:text-gray-900"
+              >
+                <i class="fas fa-bars text-xl"></i>
+              </button>
+              <img
+                src="../UTC_IT_Solution.png"
+                alt="Universal Technology Logo"
+                class="h-10"
+              />
+              <h1 class="text-sm md:text-2xl font-bold text-primary">
+                Universal Technology
+              </h1>
+            </div>
+            <div class="flex items-center space-x-4">
+              <span class="text-gray-600 hidden md:block"
+                >Welcome <span id="adminUsername" class="font-medium"></span
+              ></span>
+              <button
+                id="logoutBtn"
+                class="text-xs md:text-sm bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300"
+              >
+                <i class="fas fa-sign-out-alt mr-2"></i>Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="flex">
+        <!-- Sidebar -->
+        <nav
+          id="sidebar"
+          class="bg-white shadow-sm w-64 min-h-screen sidebar-transition lg:translate-x-0 -translate-x-full lg:static fixed z-40"
+        >
+          <div class="p-6">
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="#"
+                  data-section="dashboard"
+                  class="nav-link flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition duration-300"
+                >
+                  <i class="fas fa-tachometer-alt text-primary"></i>
+                  <span>Dashboard</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  data-section="courses"
+                  class="nav-link flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition duration-300"
+                >
+                  <i class="fas fa-graduation-cap text-primary"></i>
+                  <span>Courses</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  data-section="services"
+                  class="nav-link flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition duration-300"
+                >
+                  <i class="fas fa-cogs text-primary"></i>
+                  <span>Services</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  data-section="contact"
+                  class="nav-link flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition duration-300"
+                >
+                  <i class="fas fa-address-book text-primary"></i>
+                  <span>Contact Info</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  data-section="media"
+                  class="nav-link flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition duration-300"
+                >
+                  <i class="fas fa-images text-primary"></i>
+                  <span>Media Library</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  data-section="user"
+                  class="nav-link flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition duration-300"
+                >
+                  <i class="fas fa-images text-primary"></i>
+                  <span>User</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6">
+          <!-- Dashboard Section -->
+          <div id="dashboardSection" class="content-section">
+            <div class="mb-8">
+              <h2 class="text-xl md:text-3xl font-bold text-gray-900 mb-2">
+                Dashboard
+              </h2>
+              <p class="text-gray-600">
+                Welcome to UTC Admin Panel. Manage your website content easily.
+              </p>
+            </div>
+
+            <div
+              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
+            >
+              <div
+                class="bg-white p-6 rounded-lg shadow-sm border border-gray-200"
+              >
+                <div class="flex items-center">
+                  <div class="p-3 bg-blue-100 rounded-lg">
+                    <i class="fas fa-graduation-cap text-blue-600 text-xl"></i>
+                  </div>
+                  <div class="ml-4">
+                    <p class="text-sm font-medium text-gray-600">
+                      Total Courses
+                    </p>
+                    <p
+                      id="totalCourses"
+                      class="text-2xl font-bold text-gray-900"
+                    >
+                      -
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="bg-white p-6 rounded-lg shadow-sm border border-gray-200"
+              >
+                <div class="flex items-center">
+                  <div class="p-3 bg-green-100 rounded-lg">
+                    <i class="fas fa-cogs text-green-600 text-xl"></i>
+                  </div>
+                  <div class="ml-4">
+                    <p class="text-sm font-medium text-gray-600">
+                      Total Services
+                    </p>
+                    <p
+                      id="totalServices"
+                      class="text-2xl font-bold text-gray-900"
+                    >
+                      -
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="bg-white p-6 rounded-lg shadow-sm border border-gray-200"
+              >
+                <div class="flex items-center">
+                  <div class="p-3 bg-purple-100 rounded-lg">
+                    <i class="fas fa-images text-purple-600 text-xl"></i>
+                  </div>
+                  <div class="ml-4">
+                    <p class="text-sm font-medium text-gray-600">Media Files</p>
+                    <p id="totalMedia" class="text-2xl font-bold text-gray-900">
+                      -
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="bg-white p-6 rounded-lg shadow-sm border border-gray-200"
+                id="visitsCard"
+              >
+                <div class="flex items-center">
+                  <div class="p-3 bg-indigo-100 rounded-lg">
+                    <i class="fas fa-users text-indigo-600 text-xl"></i>
+                  </div>
+                  <div class="ml-4">
+                    <p class="text-sm font-medium text-gray-600">Site Visits</p>
+                    <p
+                      id="totalVisits"
+                      class="text-2xl font-bold text-gray-900"
+                    >
+                      -
+                    </p>
+                    <p class="text-xs text-gray-500">
+                      Unique: <span id="totalUnique">-</span> • Today:
+                      <span id="todayVisits">-</span>/<span id="todayUnique"
+                        >-</span
+                      >
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Analytics Charts -->
+            <div
+              class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 mt-8 bg-red-400 mb-6"
+            >
+              <h3 class="text-lg font-semibold text-gray-900 mb-4">
+                Analytics
+              </h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h4 class="text-sm font-medium text-gray-700 mb-2">
+                    Last 7 Days
+                  </h4>
+                  <!-- <canvas id="visits7dChart" height="100%" width="100%"></canvas> -->
+                  <canvas
+                    id="visits7dChart"
+                    style="width: 100%; height: 100%"
+                  ></canvas>
+                </div>
+                <div>
+                  <h4 class="text-sm font-medium text-gray-700 mb-2">
+                    Top Paths
+                  </h4>
+                  <canvas
+                    id="topPathsChart"
+                    style="width: 100%; height: 100%"
+                  ></canvas>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-white p-6 rounded-lg shadow-sm border border-gray-200"
+            >
+              <h3 class="text-lg font-semibold text-gray-900 mb-4">
+                Quick Actions
+              </h3>
+              <div class="grid grid-cols-1 gap-6">
+                <a
+                  href="#"
+                  data-section="courses"
+                  class="nav-link p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition duration-300"
+                >
+                  <i class="fas fa-plus text-primary text-xl mb-2"></i>
+                  <h4 class="font-medium text-gray-900">Add New Course</h4>
+                  <p class="text-sm text-gray-600">
+                    Create a new training course
+                  </p>
+                </a>
+                <a
+                  href="#"
+                  data-section="services"
+                  class="nav-link p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition duration-300"
+                >
+                  <i class="fas fa-plus text-primary text-xl mb-2"></i>
+                  <h4 class="font-medium text-gray-900">Add New Service</h4>
+                  <p class="text-sm text-gray-600">
+                    Add a new service offering
+                  </p>
+                </a>
+                <a
+                  href="#"
+                  data-section="media"
+                  class="nav-link p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition duration-300"
+                >
+                  <i class="fas fa-upload text-primary text-xl mb-2"></i>
+                  <h4 class="font-medium text-gray-900">Upload Media</h4>
+                  <p class="text-sm text-gray-600">Upload images and files</p>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Courses Section -->
+          <div id="coursesSection" class="content-section hidden">
+            <div
+              class="flex flex-col md:flex-row items-start md:justify-between md:items-center mb-8 gap-3"
+            >
+              <div>
+                <h2 class="text-xl md:text-3xl font-bold text-gray-900 mb-2">
+                  Courses Management
+                </h2>
+                <p class="text-gray-600">
+                  Manage your training courses and programs
+                </p>
+              </div>
+              <button
+                id="addCourseBtn"
+                class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300"
+              >
+                <i class="fas fa-plus mr-2"></i>Add New Course
+              </button>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+              <div class="p-6">
+                <div id="coursesList" class="space-y-4">
+                  <!-- Courses will be loaded here -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Services Section -->
+          <div id="servicesSection" class="content-section hidden">
+            <div
+              class="flex flex-col md:flex-row items-start md:justify-between md:items-center mb-8 gap-3"
+            >
+              <div>
+                <h2 class="text-xl md:text-3xl font-bold text-gray-900 mb-2">
+                  Services Management
+                </h2>
+                <p class="text-gray-600">
+                  Manage your IT services and offerings
+                </p>
+              </div>
+              <button
+                id="addServiceBtn"
+                class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300"
+              >
+                <i class="fas fa-plus mr-2"></i>Add New Service
+              </button>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+              <div class="p-6">
+                <div id="servicesList" class="space-y-4">
+                  <!-- Services will be loaded here -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Section -->
+          <div id="contactSection" class="content-section hidden">
+            <div class="mb-8">
+              <h2 class="text-xl md:text-3xl font-bold text-gray-900 mb-2">
+                Contact Information
+              </h2>
+              <p class="text-gray-600">
+                Update your company contact details and social media links
+              </p>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+              <div class="p-6">
+                <form id="contactForm" class="space-y-6">
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label
+                        class="block text-sm font-medium text-gray-700 mb-2"
+                        >Company Title</label
+                      >
+                      <input
+                        type="text"
+                        id="contactTitle"
+                        required
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                      />
+                    </div>
+                    <div>
+                      <label
+                        class="block text-sm font-medium text-gray-700 mb-2"
+                        >Email Address</label
+                      >
+                      <input
+                        type="email"
+                        id="contactEmail"
+                        required
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2"
+                      >Address</label
+                    >
+                    <input
+                      type="text"
+                      id="contactAddress"
+                      required
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    />
+                  </div>
+
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2"
+                      >Phone Numbers (one per line)</label
+                    >
+                    <textarea
+                      id="contactPhones"
+                      rows="3"
+                      required
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    ></textarea>
+                  </div>
+
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                      <label
+                        class="block text-sm font-medium text-gray-700 mb-2"
+                        >Facebook URL</label
+                      >
+                      <input
+                        type="url"
+                        id="contactFacebook"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                      />
+                    </div>
+                    <div>
+                      <label
+                        class="block text-sm font-medium text-gray-700 mb-2"
+                        >Twitter URL</label
+                      >
+                      <input
+                        type="url"
+                        id="contactTwitter"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                      />
+                    </div>
+                    <div>
+                      <label
+                        class="block text-sm font-medium text-gray-700 mb-2"
+                        >TikTok URL</label
+                      >
+                      <input
+                        type="url"
+                        id="contactTiktok"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="flex justify-end">
+                    <button
+                      type="submit"
+                      id="saveContactBtn"
+                      class="bg-primary text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition duration-300"
+                    >
+                      <i class="fas fa-save mr-2"></i>Save Changes
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- Media Section -->
+          <div id="mediaSection" class="content-section hidden">
+            <div class="flex flex-col md:flex-row justify-between mb-8 gap-2">
+              <div>
+                <h2 class="text-xl md:text-3xl font-bold text-gray-900 mb-2">
+                  Media Library
+                </h2>
+                <p class="text-gray-600">
+                  Upload and manage your images and files
+                </p>
+              </div>
+              <div class="flex">
+                <label
+                  for="mediaUpload"
+                  class="bg-primary h-10 p-2 text-white px-6 rounded-lg hover:bg-blue-700 transition duration-300 cursor-pointer"
+                >
+                  <i class="fas fa-upload mr-2"></i>Upload Files
+                </label>
+                <input
+                  type="file"
+                  id="mediaUpload"
+                  multiple
+                  accept="image/*"
+                  class="hidden"
+                />
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+              <div class="p-6">
+                <div
+                  id="mediaGrid"
+                  class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4"
+                >
+                  <!-- Media files will be loaded here -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Modals -->
+    <!-- Course Modal -->
+    <div
+      id="courseModal"
+      class="fixed inset-0 bg-black bg-opacity-50 hidden z-50"
+    >
+      <div class="flex items-center justify-center min-h-screen p-4">
+        <div
+          class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+        >
+          <div class="p-6">
+            <div class="flex justify-between items-center mb-6">
+              <h3
+                id="courseModalTitle"
+                class="text-2xl font-bold text-gray-900"
+              >
+                Add New Course
+              </h3>
+              <button
+                id="closeCourseModal"
+                class="text-gray-400 hover:text-gray-600"
+              >
+                <i class="fas fa-times text-xl"></i>
+              </button>
+            </div>
+
+            <form id="courseForm" class="space-y-6">
+              <input type="hidden" id="courseId" />
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2"
+                    >Course Title</label
+                  >
+                  <input
+                    type="text"
+                    id="courseTitle"
+                    required
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2"
+                    >Level</label
+                  >
+                  <select
+                    id="courseLevel"
+                    required
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  >
+                    <option value="">Select Level</option>
+                    <option value="Basic">Basic</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Advanced">Advanced</option>
+                    <option value="Network">Network</option>
+                    <option value="Marketing">Marketing</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2"
+                  >Course Image URL or Path</label
+                >
+                <div class="flex space-x-2 flex-col md:flex-row gap-2">
+                  <input
+                    type="text"
+                    id="courseImage"
+                    required
+                    class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  />
+                  <button
+                    type="button"
+                    id="browseCourseImage"
+                    class="bg-gray-500 text-white px-4 py-3 rounded-lg hover:bg-gray-600 transition duration-300"
+                  >
+                    Browse
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2"
+                  >Course Outlines (one per line)</label
+                >
+                <textarea
+                  id="courseOutlines"
+                  rows="6"
+                  required
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                ></textarea>
+              </div>
+
+              <div class="flex justify-end space-x-4">
+                <button
+                  type="button"
+                  id="cancelCourse"
+                  class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition duration-300"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  id="saveCourseBtn"
+                  class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300"
+                >
+                  <i class="fas fa-save mr-2"></i>Save Course
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service Modal -->
+    <div
+      id="serviceModal"
+      class="fixed inset-0 bg-black bg-opacity-50 hidden z-50"
+    >
+      <div class="flex items-center justify-center min-h-screen p-4">
+        <div
+          class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+        >
+          <div class="p-6">
+            <div class="flex justify-between items-center mb-6">
+              <h3
+                id="serviceModalTitle"
+                class="text-2xl font-bold text-gray-900"
+              >
+                Add New Service
+              </h3>
+              <button
+                id="closeServiceModal"
+                class="text-gray-400 hover:text-gray-600"
+              >
+                <i class="fas fa-times text-xl"></i>
+              </button>
+            </div>
+
+            <form id="serviceForm" class="space-y-6">
+              <input type="hidden" id="serviceId" />
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2"
+                  >Service Title</label
+                >
+                <input
+                  type="text"
+                  id="serviceTitle"
+                  required
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                />
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2"
+                  >Service Description</label
+                >
+                <textarea
+                  id="serviceDescription"
+                  rows="4"
+                  required
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                ></textarea>
+              </div>
+
+              <div class="grid grid-cols-1 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2"
+                    >Image 1 URL or Path</label
+                  >
+                  <div class="flex space-x-2 flex-col md:flex-row gap-2">
+                    <input
+                      type="text"
+                      id="serviceImage1"
+                      required
+                      class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    />
+                    <button
+                      type="button"
+                      data-target="serviceImage1"
+                      class="browseImageBtn bg-gray-500 text-white px-3 py-3 rounded-lg hover:bg-gray-600 transition duration-300"
+                    >
+                      Browse
+                    </button>
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2"
+                    >Image 2 URL or Path</label
+                  >
+                  <div class="flex space-x-2 flex-col md:flex-row gap-2">
+                    <input
+                      type="text"
+                      id="serviceImage2"
+                      required
+                      class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    />
+                    <button
+                      type="button"
+                      data-target="serviceImage2"
+                      class="browseImageBtn bg-gray-500 text-white px-3 py-3 rounded-lg hover:bg-gray-600 transition duration-300"
+                    >
+                      Browse
+                    </button>
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2"
+                    >Image 3 URL or Path</label
+                  >
+                  <div class="flex space-x-2 flex-col md:flex-row gap-2">
+                    <input
+                      type="text"
+                      id="serviceImage3"
+                      required
+                      class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    />
+                    <button
+                      type="button"
+                      data-target="serviceImage3"
+                      class="browseImageBtn bg-gray-500 text-white px-3 py-3 rounded-lg hover:bg-gray-600 transition duration-300"
+                    >
+                      Browse
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2"
+                  >Service Outlines (one per line, optional)</label
+                >
+                <textarea
+                  id="serviceOutlines"
+                  rows="4"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                ></textarea>
+              </div>
+
+              <div class="flex justify-end space-x-4">
+                <button
+                  type="button"
+                  id="cancelService"
+                  class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition duration-300"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  id="saveServiceBtn"
+                  class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300"
+                >
+                  <i class="fas fa-save mr-2"></i>Save Service
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="fixed top-4 right-4 z-50 space-y-2"></div>
+
+    <script src="admin.js"></script>
+  </body>
+</html>

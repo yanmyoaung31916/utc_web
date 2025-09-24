@@ -1,0 +1,29 @@
+[
+  {
+    "id": "1758614950534",
+    "title": "Testing",
+    "level": "Intermediate",
+    "image": "/uploads/image-1758614939589-716549304.png",
+    "alt": "Testing",
+    "outlines": [
+      "testing",
+      "testing",
+      "testing",
+      "testing",
+      "testing"
+    ]
+  },
+  {
+    "id": "1758619739038",
+    "title": "A+ Course",
+    "level": "Intermediate",
+    "image": "/uploads/image-1758619713762-966956466.jpg",
+    "alt": "A+ Course",
+    "outlines": [
+      "CPU",
+      "RAM",
+      "Motherboard ",
+      "Ports"
+    ]
+  }
+]

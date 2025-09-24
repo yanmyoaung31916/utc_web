@@ -1,0 +1,31 @@
+[
+  {
+    "id": 1758618600363,
+    "title": "Networking Service",
+    "description": "This is networking service.",
+    "images": {
+      "image1": "/uploads/image-1758618578118-413519757.png",
+      "image2": "/uploads/image-1758618585427-721580957.png",
+      "image3": "/uploads/image-1758618589155-373593754.png"
+    },
+    "outlines": [
+      "Networking service",
+      "Networking service",
+      "Networking service"
+    ]
+  },
+  {
+    "id": 1758619882459,
+    "title": "Computer service ",
+    "description": "Computer service is there for you.",
+    "images": {
+      "image1": "/uploads/image-1758619838776-226430156.jpg",
+      "image2": "/uploads/image-1758619848373-400455014.jpg",
+      "image3": "/uploads/image-1758619861363-166580493.jpg"
+    },
+    "outlines": [
+      "Fix RAM",
+      "Fix Motherboard "
+    ]
+  }
+]
