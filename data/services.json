@@ -1,46 +1,47 @@
 [
   {
-    "id": 1758618600363,
-    "title": "Networking Service",
-    "description": "This is networking service.",
+    "id": 1758730250595,
+    "title": "Computer Sales & Services",
+    "description": "From the latest computer hardware to expert repair and maintenance services, we ensure your systems run at peak performance.",
     "images": {
-      "image1": "/uploads/image-1758618578118-413519757.png",
-      "image2": "/uploads/image-1758618585427-721580957.png",
-      "image3": "/uploads/image-1758618589155-373593754.png"
-    },
-    "outlines": [
-      "Networking service",
-      "Networking service",
-      "Networking service"
-    ]
-  },
-  {
-    "id": 1758619882459,
-    "title": "Computer service ",
-    "description": "Computer service is there for you.",
-    "images": {
-      "image1": "/uploads/image-1758619838776-226430156.jpg",
-      "image2": "/uploads/image-1758619848373-400455014.jpg",
-      "image3": "/uploads/image-1758619861363-166580493.jpg"
-    },
-    "outlines": [
-      "Fix RAM",
-      "Fix Motherboard "
-    ]
-  },
-  {
-    "id": 1758718116468,
-    "title": "Test",
-    "description": "Test",
-    "images": {
-      "image1": "/uploads/image-1758718091076-759745644.jpg",
-      "image2": "/uploads/image-1758718097774-455627490.jpg",
-      "image3": "/uploads/image-1758718105090-908755823.jpg"
+      "image1": "/uploads/image-1758730242328-225303977.jpg",
+      "image2": "/uploads/image-1758730245500-80911050.jpg",
+      "image3": "/uploads/image-1758730248764-836343286.jpg"
     },
     "outlines": {
-      "0": "Test",
-      "1": "Test ",
-      "2": "Test "
+      "0": "HD Camera Installation",
+      "1": "24/7 Monitoring Systems",
+      "2": "Remote Viewing Setup"
+    }
+  },
+  {
+    "id": 1758730346383,
+    "title": "Network Services",
+    "description": "Whether you need to set up a new network or maintain an existing one, our skilled professionals provide seamless solutions tailored to your needs.\n\n",
+    "images": {
+      "image1": "/uploads/image-1758730287883-971950298.jpg",
+      "image2": "/uploads/image-1758730291982-324372061.jpg",
+      "image3": "/uploads/image-1758730295695-67753998.jpg"
+    },
+    "outlines": {
+      "0": "Infrastructure services (DNS, DHCP, VPN, firewalls)",
+      "1": "Cloud networking (load balancing, CDN, API gateways)",
+      "2": "Security (encryption, identity management, monitoring)"
+    }
+  },
+  {
+    "id": 1758730506159,
+    "title": "Digital Marketing",
+    "description": "Grow your online presence with our targeted and results-driven digital marketing strategies.\n\n",
+    "images": {
+      "image1": "/uploads/image-1758730445756-680406557.jpg",
+      "image2": "/uploads/image-1758730453872-11353117.jpg",
+      "image3": "/uploads/image-1758730457679-928844482.jpg"
+    },
+    "outlines": {
+      "0": "Platforms (Facebook, Instagram, LinkedIn, Twitter, TikTok)",
+      "1": "Content calendar",
+      "2": "Mobile & App Marketing"
     }
   }
 ]

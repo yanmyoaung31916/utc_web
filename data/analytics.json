@@ -1,6 +1,6 @@
 {
   "totals": {
-    "visits": 164,
+    "visits": 461,
     "uniqueVisitors": 21
   },
   "byDate": {
@@ -33,12 +33,16 @@
       "uniqueVisitors": 13
     },
     "2025-09-24": {
-      "visits": 11,
+      "visits": 139,
+      "uniqueVisitors": 3
+    },
+    "2025-09-25": {
+      "visits": 169,
       "uniqueVisitors": 3
     }
   },
   "byPath": {
-    "/": 94,
+    "/": 391,
     "/about": 18,
     "/services": 24,
     "/courses": 20,
@@ -144,6 +148,11 @@
       "0be9ccc9812673c76723aa565e24369f6adc1e583258ac9b01c7c4a8c9538dff": true
     },
     "2025-09-24": {
+      "bb8a60148943319564516a4e98292f7e75b7973b9a32ac42d30938a6577e4fc7": true,
+      "0be9ccc9812673c76723aa565e24369f6adc1e583258ac9b01c7c4a8c9538dff": true,
+      "f4a726128aba00857acc61db57b08bfbea1d54fbc3fdce0c319380e6eae2946b": true
+    },
+    "2025-09-25": {
       "bb8a60148943319564516a4e98292f7e75b7973b9a32ac42d30938a6577e4fc7": true,
       "0be9ccc9812673c76723aa565e24369f6adc1e583258ac9b01c7c4a8c9538dff": true,
       "f4a726128aba00857acc61db57b08bfbea1d54fbc3fdce0c319380e6eae2946b": true

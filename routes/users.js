@@ -99,12 +99,12 @@ router.post('/',
 
       // Check if username already exists
       if (await User.checkUsernameExists(username)) {
-        return res.status(409).json({ error: 'Username already exists' });
+        return res.status(409).json({ error: 'Username already exists!' });
       }
 
-      // Check if email already exists
+      // Check if email already exists      
       if (await User.checkEmailExists(email)) {
-        return res.status(409).json({ error: 'Email already exists' });
+        return res.status(409).json({ error: 'Email already exists!' });
       }
 
       // If creating admin, send OTP and require verification

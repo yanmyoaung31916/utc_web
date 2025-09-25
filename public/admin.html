@@ -4,24 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>UTC Admin Panel</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="./UTC_IT_Solution.png" type="image/png" />
+    <link href="./css/output.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       rel="stylesheet"
     />
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              primary: "#2563eb",
-              secondary: "#1d4ed8",
-            },
-          },
-        },
-      };
-    </script>
     <style>
       .sidebar-transition {
         transition: transform 0.3s ease-in-out;
@@ -134,8 +123,7 @@
               </h1>
             </div>
             <div class="flex items-center space-x-4">
-              <span class="text-gray-600 hidden md:block"
-                >Welcome </span>
+              <span class="text-gray-600 hidden md:block">Welcome </span>
               <button
                 id="logoutBtn"
                 class="text-sm md:text-sm bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300"
@@ -527,7 +515,7 @@
                     ></textarea>
                   </div>
 
-                  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label
                         class="block text-sm font-medium text-gray-700 mb-2"
@@ -542,11 +530,11 @@
                     <div>
                       <label
                         class="block text-sm font-medium text-gray-700 mb-2"
-                        >Twitter URL</label
+                        >Youtube URL</label
                       >
                       <input
                         type="url"
-                        id="contactTwitter"
+                        id="contactYoutube"
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                       />
                     </div>
@@ -558,6 +546,17 @@
                       <input
                         type="url"
                         id="contactTiktok"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                      />
+                    </div>
+                    <div>
+                      <label
+                        class="block text-sm font-medium text-gray-700 mb-2"
+                        >Viber URL</label
+                      >
+                      <input
+                        type="url"
+                        id="contactViber"
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                       />
                     </div>
@@ -619,7 +618,9 @@
 
           <!-- User Management Section -->
           <div id="usersSection" class="content-section hidden">
-            <div class="flex flex-col md:flex-row items-start md:justify-between md:items-center mb-8 gap-3">
+            <div
+              class="flex flex-col md:flex-row items-start md:justify-between md:items-center mb-8 gap-3"
+            >
               <div>
                 <h2 class="text-xl md:text-3xl font-bold text-gray-900 mb-2">
                   User Management
@@ -685,6 +686,7 @@
                   <input
                     type="text"
                     id="courseTitle"
+                    placeholder="Course Title"
                     required
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                   />
@@ -716,6 +718,7 @@
                   <input
                     type="text"
                     id="courseImage"
+                    placeholder="Image URL"
                     required
                     class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                   />
@@ -735,6 +738,7 @@
                 >
                 <textarea
                   id="courseOutlines"
+                  placeholder="Course Outlines"
                   rows="6"
                   required
                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
@@ -797,6 +801,7 @@
                 >
                 <input
                   type="text"
+                  placeholder="Service Title"
                   id="serviceTitle"
                   required
                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
@@ -808,6 +813,7 @@
                   >Service Description</label
                 >
                 <textarea
+                  placeholder="Service Description"
                   id="serviceDescription"
                   rows="4"
                   required
@@ -822,6 +828,7 @@
                   >
                   <div class="flex space-x-2 flex-col md:flex-row gap-2">
                     <input
+                      placeholder="Image 1 URL"
                       type="text"
                       id="serviceImage1"
                       required
@@ -843,6 +850,7 @@
                   <div class="flex space-x-2 flex-col md:flex-row gap-2">
                     <input
                       type="text"
+                      placeholder="Image 2 URL"
                       id="serviceImage2"
                       required
                       class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
@@ -863,6 +871,7 @@
                   <div class="flex space-x-2 flex-col md:flex-row gap-2">
                     <input
                       type="text"
+                      placeholder="Image 3 URL"
                       id="serviceImage3"
                       required
                       class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
@@ -884,6 +893,7 @@
                 >
                 <textarea
                   id="serviceOutlines"
+                  placeholder="Service Outlines"
                   rows="4"
                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                 ></textarea>
@@ -922,10 +932,7 @@
         >
           <div class="p-6">
             <div class="flex justify-between items-center mb-6">
-              <h3
-                id="userModalTitle"
-                class="text-2xl font-bold text-gray-900"
-              >
+              <h3 id="userModalTitle" class="text-2xl font-bold text-gray-900">
                 Add New User
               </h3>
               <button
@@ -1021,7 +1028,8 @@
                     placeholder="Enter password (min 8 characters)"
                   />
                   <p class="text-xs text-gray-500 mt-1">
-                    Password must contain at least one lowercase letter, one uppercase letter, and one number
+                    Password must contain at least one lowercase letter, one
+                    uppercase letter, and one number
                   </p>
                 </div>
               </div>

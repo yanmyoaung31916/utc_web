@@ -1,41 +1,40 @@
 [
   {
-    "id": "1758614950534",
-    "title": "Testing",
-    "level": "Intermediate",
-    "image": "/uploads/image-1758614939589-716549304.png",
-    "alt": "Testing",
-    "outlines": [
-      "testing",
-      "testing",
-      "testing",
-      "testing",
-      "testing"
-    ]
-  },
-  {
-    "id": "1758619739038",
-    "title": "A+ Course",
-    "level": "Intermediate",
-    "image": "/uploads/image-1758619713762-966956466.jpg",
-    "alt": "A+ Course",
-    "outlines": [
-      "CPU",
-      "RAM",
-      "Motherboard ",
-      "Ports"
-    ]
-  },
-  {
-    "id": "1758723909795",
-    "title": "Course Title",
+    "id": "1758731125267",
+    "title": "Computer Basic Course",
     "level": "Basic",
-    "image": "/uploads/image-1758723129035-809728049.png",
-    "alt": "Course Title",
+    "image": "/uploads/image-1758732433743-805674995.jpg",
+    "alt": "Computer Basic Course",
     "outlines": [
-      "outline",
-      "outline",
-      "outline"
+      "Introduction To Computer System",
+      "Using Mouse & Keyboard",
+      "Using Windows 10",
+      "English and Myanmar Typing",
+      "Microsoft Word",
+      "Microsoft Excel",
+      "Microsoft PowerPoint",
+      "Using Internet and E-mail"
+    ]
+  },
+  {
+    "id": "1758731173704",
+    "title": "Network Essential Course",
+    "level": "Network",
+    "image": "/uploads/image-1758732570261-570216542.png",
+    "alt": "Network Essential Course",
+    "outlines": [
+      "Digital fundamentals & basic hardware knowledge",
+      "Network topologies",
+      "TCP/IP protocols & OSI layers",
+      "Structured cabling & wireless networking",
+      "IP subnetting & addressing",
+      "Networking media, device, & LAN design",
+      "Managing DHCP, DNS & RDC",
+      "Configuring & administering Ms Domain network",
+      "Managing public & shared folders",
+      "User account management",
+      "NTFS security & managing shared resources",
+      "Cloud storage integration"
     ]
   }
 ]

@@ -145,8 +145,8 @@ const User = {
 
   async checkEmailExists(email, excludeId = null) {
     return new Promise((resolve, reject) => {
-      let query = `SELECT id FROM users WHERE email = ? AND isActive = 1`;
-      let params = [email];
+      let query = `SELECT id FROM users WHERE email = ? COLLATE NOCASE`;
+      let params = [email.trim()];
       
       if (excludeId) {
         query += ` AND id != ?`;
@@ -155,11 +155,11 @@ const User = {
       
       db.get(query, params, (err, row) => {
         if (err) return reject(err);
-        resolve(!!row);
+        resolve(!!row); 
       });
     });
   },
-
+  
   async checkUsernameExists(username, excludeId = null) {
     return new Promise((resolve, reject) => {
       let query = `SELECT id FROM users WHERE username = ? AND isActive = 1`;

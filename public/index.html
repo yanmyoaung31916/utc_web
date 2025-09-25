@@ -4,26 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Universal Technology</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="icon" href="./images/UTC IT Solution.png" type="image/png" />
-
-    <script>
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              primary: "#2563eb",
-              secondary: "#1d4ed8",
-              active: "#2563eb",
-            },
-            animation: {
-              "bounce-slow": "bounce 3s linear infinite",
-            },
-          },
-        },
-      };
-    </script>
+    <link href="./css/output.css" rel="stylesheet" />
+    <link rel="icon" href="./UTC_IT_Solution.png" type="image/png" />
     <script>
       if (localStorage.getItem("theme") === "dark") {
         document.documentElement.classList.add("dark");
@@ -31,6 +13,7 @@
         document.documentElement.classList.remove("dark");
       }
     </script>
+
     <style>
       .lazy-loading {
         opacity: 0;
@@ -43,17 +26,6 @@
         transform: translateY(0);
       }
 
-      @keyframes kenBurns {
-        0% {
-          transform: scale(1);
-        }
-        100% {
-          transform: scale(1.2);
-        }
-      }
-      .animate-ken-burns {
-        animation: kenBurns 20s ease-out infinite alternate;
-      }
       .modal-transition {
         transition: opacity 0.3s ease-out, transform 0.3s ease-out;
       }
@@ -62,7 +34,7 @@
   <body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
     <div
       id="modal"
-      class="fixed inset-0 bg-black bg-opacity-50 overflow-y-auto h-full w-full hidden flex items-center justify-center modal-transition opacity-0 scale-95 z-50"
+      class="fixed inset-0 bg-black bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center modal-transition opacity-0 scale-95 z-50"
     >
       <div
         class="relative p-8 border w-11/12 md:w-3/4 lg:w-1/2 shadow-2xl rounded-2xl bg-white dark:bg-gray-800 max-h-[90vh] overflow-y-auto"
@@ -92,7 +64,7 @@
               alt="Universal Technology Logo"
               class="h-10"
             />
-            <span class="text-2xl font-bold text-primary"
+            <span class="text-xl md:text-2xl font-bold text-primary"
               >Universal Technology</span
             >
           </a>
@@ -130,7 +102,7 @@
               onclick="
                   document.documentElement.classList.toggle('dark');
                   localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');"
-              class="p-2 rounded-full border border-gray-200 dark:border-gray-700"
+              class="p-2 rounded-full border border-gray-200 dark:border-gray-700 cursor-pointer"
             >
               <svg
                 class="w-5 h-5 dark:hidden"
@@ -253,12 +225,8 @@
           >
             <div class="relative w-full h-full overflow-hidden">
               <div
-                class="absolute inset-0 bg-cover bg-center animate-ken-burns"
-                style="
-                  background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80');
-                "
+                class="absolute inset-0 bg-cover bg-center animate-kenBurns bg-[url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80')]"
               ></div>
-              <div class="absolute inset-0 bg-black bg-opacity-50"></div>
               <div
                 class="absolute inset-0 flex flex-col items-center justify-center text-white p-4"
               >
@@ -276,16 +244,16 @@
                 <div
                   class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4"
                 >
-                  <a href="#contact">
+                  <a href="#contact" class="w-full md:w-auto">
                     <button
-                      class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-sm md:text-base transition duration-300 ease-in-out transform hover:-translate-y-1"
+                      class="cursor-pointer w-full md:w-auto bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-sm md:text-base transition duration-300 ease-in-out transform hover:-translate-y-1"
                     >
                       Get Started
                     </button>
                   </a>
-                  <a href="#services">
+                  <a href="#services" class="w-full md:w-auto">
                     <button
-                      class="bg-transparent hover:bg-white hover:text-blue-500 text-white font-bold py-2 px-4 rounded border border-white text-sm md:text-base transition duration-300 ease-in-out transform hover:-translate-y-1"
+                      class="cursor-pointer w-full md:w-auto bg-transparent hover:bg-white hover:text-blue-500 text-white font-bold py-2 px-4 rounded border border-white text-sm md:text-base transition duration-300 ease-in-out transform hover:-translate-y-1"
                     >
                       Our Services
                     </button>
@@ -300,12 +268,11 @@
           >
             <div class="relative w-full h-full overflow-hidden">
               <div
-                class="absolute inset-0 bg-cover bg-center animate-ken-burns"
+                class="absolute inset-0 bg-cover bg-center animate-kenBurns"
                 style="
                   background-image: url('https://images.unsplash.com/photo-1504639725590-34d0984388bd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80');
                 "
               ></div>
-              <div class="absolute inset-0 bg-black bg-opacity-50"></div>
               <div
                 class="absolute inset-0 flex flex-col items-center justify-center text-white p-4"
               >
@@ -323,16 +290,16 @@
                 <div
                   class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4"
                 >
-                  <a href="#contact">
+                  <a href="#contact" class="w-full md:w-auto">
                     <button
-                      class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-sm md:text-base transition duration-300 ease-in-out transform hover:-translate-y-1"
+                      class="cursor-pointer w-full md:w-auto bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-sm md:text-base transition duration-300 ease-in-out transform hover:-translate-y-1"
                     >
                       Get Started
                     </button>
                   </a>
-                  <a href="#services">
+                  <a href="#services" class="w-full md:w-auto">
                     <button
-                      class="bg-transparent hover:bg-white hover:text-blue-500 text-white font-bold py-2 px-4 rounded border border-white text-sm md:text-base transition duration-300 ease-in-out transform hover:-translate-y-1"
+                      class="cursor-pointer w-full md:w-auto bg-transparent hover:bg-white hover:text-blue-500 text-white font-bold py-2 px-4 rounded border border-white text-sm md:text-base transition duration-300 ease-in-out transform hover:-translate-y-1"
                     >
                       Our Services
                     </button>
@@ -347,12 +314,11 @@
           >
             <div class="relative w-full h-full overflow-hidden">
               <div
-                class="absolute inset-0 bg-cover bg-center animate-ken-burns"
+                class="absolute inset-0 bg-cover bg-center animate-kenBurns"
                 style="
                   background-image: url('https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
                 "
               ></div>
-              <div class="absolute inset-0 bg-black bg-opacity-50"></div>
               <div
                 class="absolute inset-0 flex flex-col items-center justify-center text-white p-4"
               >
@@ -369,16 +335,16 @@
                 <div
                   class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4"
                 >
-                  <a href="#contact">
+                  <a href="#contact" class="w-full md:w-auto">
                     <button
-                      class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-sm md:text-base transition duration-300 ease-in-out transform hover:-translate-y-1"
+                      class="cursor-pointer w-full md:w-auto bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-sm md:text-base transition duration-300 ease-in-out transform hover:-translate-y-1"
                     >
                       Get Started
                     </button>
                   </a>
-                  <a href="#services">
+                  <a href="#services" class="w-full md:w-auto">
                     <button
-                      class="bg-transparent hover:bg-white hover:text-blue-500 text-white font-bold py-2 px-4 rounded border border-white text-sm md:text-base transition duration-300 ease-in-out transform hover:-translate-y-1"
+                      class="cursor-pointer w-full md:w-auto bg-transparent hover:bg-white hover:text-blue-500 text-white font-bold py-2 px-4 rounded border border-white text-sm md:text-base transition duration-300 ease-in-out transform hover:-translate-y-1"
                     >
                       Our Services
                     </button>
@@ -492,12 +458,12 @@
             />
           </div>
           <h4
-            class="mt-4 text-gray-800 font-semibold dark:text-white max-w-4xl mx-auto leading-7 text-start"
+            class="mt-4 text-gray-800 font-semibold dark:text-white max-w-4xl mx-auto leading-7 text-justify"
           >
             Biography of Mr. Than Naing Win
           </h4>
           <p
-            class="mt-4 text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-7 text-start"
+            class="mt-4 text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-7 text-justify"
           >
             <strong>Mr. Than Naing Win</strong>, born on May 3, 1985, in
             Mandalay, Myanmar, is an accomplished IT professional, educator, and
@@ -505,12 +471,12 @@
             significantly to the local technology and education sectors.
           </p>
           <h4
-            class="mt-4 text-gray-800 font-semibold dark:text-white max-w-4xl mx-auto leading-7 text-start"
+            class="mt-4 text-gray-800 font-semibold dark:text-white max-w-4xl mx-auto leading-7 text-justify"
           >
             Education
           </h4>
           <p
-            class="mt-4 text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-7 text-start"
+            class="mt-4 text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-7 text-justify"
           >
             Mr. Than Naing Win began his formal education at Basic Education
             High School (B.E.H.S.) No. 11, where he studied until Grade 9. He
@@ -524,13 +490,13 @@
             2008.
           </p>
           <h4
-            class="mt-4 text-gray-800 dark:text-white font-semibold max-w-4xl mx-auto leading-7 text-start"
+            class="mt-4 text-gray-800 dark:text-white font-semibold max-w-4xl mx-auto leading-7 text-justify"
           >
             Professional Career
           </h4>
 
           <p
-            class="mt-4 text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-7 text-start"
+            class="mt-4 text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-7 text-justify"
           >
             Mr. Than Naing Win's professional career is marked by a blend of
             entrepreneurial ventures, technical expertise, and academic
@@ -538,12 +504,12 @@
           </p>
 
           <h4
-            class="mt-4 text-gray-800 dark:text-white font-semibold max-w-4xl mx-auto leading-7 text-start"
+            class="mt-4 text-gray-800 dark:text-white font-semibold max-w-4xl mx-auto leading-7 text-justify"
           >
             Entrepreneurial Ventures
           </h4>
           <p
-            class="mt-4 text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-7 text-start"
+            class="mt-4 text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-7 text-justify"
           >
             In 2009, he founded Win Computer, a Computer Services and Training
             Center, which he successfully managed until 2014. This venture
@@ -554,12 +520,12 @@
             role in advancing technology in the region.
           </p>
           <h4
-            class="mt-4 text-gray-800 dark:text-white font-semibold max-w-4xl mx-auto leading-7 text-start"
+            class="mt-4 text-gray-800 dark:text-white font-semibold max-w-4xl mx-auto leading-7 text-justify"
           >
             Corporate Experience
           </h4>
           <p
-            class="mt-4 text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-7 text-start"
+            class="mt-4 text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-7 text-justify"
           >
             From 2016 to 2021, Mr. Than Naing Win worked at Mo Mo International
             Trading Co., Ltd. as an IT Technician and Digital Marketing
@@ -567,12 +533,12 @@
             gained valuable experience in digital marketing strategies.
           </p>
           <h4
-            class="mt-4 text-gray-800 dark:text-white font-semibold max-w-4xl mx-auto leading-7 text-start"
+            class="mt-4 text-gray-800 dark:text-white font-semibold max-w-4xl mx-auto leading-7 text-justify"
           >
             Academic Contributions
           </h4>
           <p
-            class="mt-4 text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-7 text-start"
+            class="mt-4 text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-7 text-justify"
           >
             Mr. Than Naing Win has a long-standing passion for education. He
             began teaching as a Senior Lecturer at iNet College in 2017, a role
@@ -582,12 +548,12 @@
             countless students to pursue careers in IT and digital technologies.
           </p>
           <h4
-            class="mt-4 text-gray-800 dark:text-white font-semibold max-w-4xl mx-auto leading-7 text-start"
+            class="mt-4 text-gray-800 dark:text-white font-semibold max-w-4xl mx-auto leading-7 text-justify"
           >
             Leadership and Vision
           </h4>
           <p
-            class="mt-4 text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-7 text-start"
+            class="mt-4 text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-7 text-justify"
           >
             As the CEO of Universal Technology IT Solution, Mr. Than Naing Win
             is committed to providing cutting-edge IT solutions and fostering
@@ -596,12 +562,12 @@
             knowledge needed to succeed in the digital age.
           </p>
           <h4
-            class="mt-4 text-gray-800 dark:text-white font-semibold max-w-4xl mx-auto leading-7 text-start"
+            class="mt-4 text-gray-800 dark:text-white font-semibold max-w-4xl mx-auto leading-7 text-justify"
           >
             Personal Life
           </h4>
           <p
-            class="mt-4 text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-7 text-start"
+            class="mt-4 text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-7 text-justify"
           >
             Mr. Than Naing Win continues to live in Mandalay, where he balances
             his professional endeavors with a dedication to his community. He is
@@ -609,12 +575,12 @@
             transformative power of digital solutions.
           </p>
           <h4
-            class="mt-4 text-gray-800 dark:text-white font-semibold max-w-4xl mx-auto leading-7 text-start"
+            class="mt-4 text-gray-800 dark:text-white font-semibold max-w-4xl mx-auto leading-7 text-justify"
           >
             Conclusion
           </h4>
           <p
-            class="mt-4 text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-7 text-start"
+            class="mt-4 text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-7 text-justify"
           >
             With his extensive experience in IT, education, and business, Mr.
             Than Naing Win has become a respected figure in Mandalay’s
@@ -663,22 +629,24 @@
           <div class="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-8">
             <!-- Expert team -->
             <div class="bg-gray-50 dark:bg-gray-700 p-8 rounded-xl shadow-lg">
-              <div
-                class="w-14 h-14 bg-primary/10 rounded-lg flex items-center justify-center mb-6"
-              >
-                <svg
-                  class="w-8 h-8 text-primary"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+              <div class="flex justify-center items-center">
+                <div
+                  class="w-14 h-14 bg-primary/10 rounded-lg flex items-center justify-center mb-6"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
-                  />
-                </svg>
+                  <svg
+                    class="w-8 h-8 text-primary"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
+                    />
+                  </svg>
+                </div>
               </div>
               <h3
                 class="text-xl font-semibold text-gray-900 dark:text-white mb-4"
@@ -693,22 +661,24 @@
 
             <!-- comprehensive solution -->
             <div class="bg-gray-50 dark:bg-gray-700 p-8 rounded-xl shadow-lg">
-              <div
-                class="w-14 h-14 bg-primary/10 rounded-lg flex items-center justify-center mb-6"
-              >
-                <svg
-                  class="w-8 h-8 text-primary"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+              <div class="flex items-center justify-center">
+                <div
+                  class="w-14 h-14 bg-primary/10 rounded-lg flex items-center justify-center mb-6"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                  />
-                </svg>
+                  <svg
+                    class="w-8 h-8 text-primary"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                    />
+                  </svg>
+                </div>
               </div>
               <h3
                 class="text-xl font-semibold text-gray-900 dark:text-white mb-4"
@@ -723,22 +693,24 @@
 
             <!-- Client-centric approach -->
             <div class="bg-gray-50 dark:bg-gray-700 p-8 rounded-xl shadow-lg">
-              <div
-                class="w-14 h-14 bg-primary/10 rounded-lg flex items-center justify-center mb-6"
-              >
-                <svg
-                  class="w-8 h-8 text-primary"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+              <div class="flex items-center justify-center">
+                <div
+                  class="w-14 h-14 bg-primary/10 rounded-lg flex items-center justify-center mb-6"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                  />
-                </svg>
+                  <svg
+                    class="w-8 h-8 text-primary"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                    />
+                  </svg>
+                </div>
               </div>
               <h3
                 class="text-xl font-semibold text-gray-900 dark:text-white mb-4"
@@ -753,22 +725,24 @@
 
             <!-- cutting-edge traning -->
             <div class="bg-gray-50 dark:bg-gray-700 p-8 rounded-xl shadow-lg">
-              <div
-                class="w-14 h-14 bg-primary/10 rounded-lg flex items-center justify-center mb-6"
-              >
-                <svg
-                  class="w-8 h-8 text-primary"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+              <div class="flex items-center justify-center">
+                <div
+                  class="w-14 h-14 bg-primary/10 rounded-lg flex items-center justify-center mb-6"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                  />
-                </svg>
+                  <svg
+                    class="w-8 h-8 text-primary"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                    />
+                  </svg>
+                </div>
               </div>
               <h3
                 class="text-xl font-semibold text-gray-900 dark:text-white mb-4"
@@ -864,6 +838,7 @@
                 </label>
                 <input
                   type="text"
+                  placeholder="Your Full Name"
                   class="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
@@ -875,6 +850,7 @@
                 </label>
                 <input
                   type="email"
+                  placeholder="Your Email Address"
                   class="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
@@ -886,6 +862,7 @@
                 </label>
                 <textarea
                   rows="4"
+                  placeholder="Your Message"
                   class="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 ></textarea>
               </div>
@@ -893,7 +870,7 @@
                 <a
                   href="mailto:info@utcitsolution.com"
                   target="_blank"
-                  class="w-full text-center px-8 py-4 bg-primary text-white rounded-lg hover:bg-blue-700 transition-colors font-medium transition duration-300 ease-in-out transform hover:-translate-y-1"
+                  class="w-full text-center px-8 py-4 bg-primary text-white rounded-lg hover:bg-blue-700 font-medium transition duration-300 ease-in-out transform hover:-translate-y-1"
                 >
                   Send Message
                 </a>
@@ -911,11 +888,12 @@
               >
                 Our Office
               </h3>
+
               <div class="space-y-4">
                 <!-- Address -->
-                <div class="flex items-start space-x-4">
+                <div class="flex items-center space-x-4">
                   <svg
-                    class="w-6 h-6 text-primary mt-1"
+                    class="w-6 h-6 text-primary flex-shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -945,9 +923,9 @@
                 </div>
 
                 <!-- Email -->
-                <div class="flex items-start space-x-4">
+                <div class="flex items-center space-x-4">
                   <svg
-                    class="w-6 h-6 text-primary mt-1"
+                    class="w-6 h-6 text-primary flex-shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -971,9 +949,9 @@
                 </div>
 
                 <!-- Phone -->
-                <div class="flex items-start space-x-4">
+                <div class="flex items-center space-x-4">
                   <svg
-                    class="w-6 h-6 text-primary mt-1"
+                    class="w-6 h-6 text-primary flex-shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -1005,11 +983,12 @@
               >
                 Follow Us
               </h3>
-              <div class="flex space-x-4">
+              <div class="flex items-center gap-6">
                 <a
                   id="facebook-link"
                   href="#"
-                  class="text-gray-600 dark:text-gray-300 hover:text-primary"
+                  target="_blank"
+                  class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-700"
                 >
                   <!-- Facebook Icon -->
                   <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -1019,32 +998,85 @@
                   </svg>
                 </a>
                 <a
-                  id="twitter-link"
+                  id="youtube-link"
                   href="#"
-                  class="text-gray-600 dark:text-gray-300 hover:text-primary"
+                  target="_blank"
+                  class="text-gray-600 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-600"
                 >
-                  <!-- Twitter Icon -->
-                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <!-- YouTube Icon -->
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 16 16">
                     <path
-                      d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"
+                      d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"
                     />
                   </svg>
                 </a>
                 <a
                   id="tiktok-link"
                   href="#"
-                  class="text-gray-600 dark:text-gray-300 hover:text-primary"
+                  target="_blank"
+                  class="text-gray-600 dark:text-gray-300 hover:text-slate-950 dark:hover:text-slate-950"
                 >
                   <!-- Tiktok Icon -->
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    class="bi bi-tiktok w-6 h-6"
-                    viewBox="0 0 16 16"
-                  >
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 16 16">
                     <path
                       d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3z"
                     />
+                  </svg>
+                </a>
+                <a
+                  id="viber-link"
+                  href="#"
+                  target="_blank"
+                  class="text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-600"
+                >
+                  <?xml version="1.0" encoding="iso-8859-1"?>
+
+                  <svg
+                    fill="currentColor"
+                    class="w-6 h-6"
+                    id="Layer_1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    viewBox="0 0 322 322"
+                    xml:space="preserve"
+                  >
+                    <g id="XMLID_7_">
+                      <path
+                        id="XMLID_8_"
+                        d="M275.445,135.123c0.387-45.398-38.279-87.016-86.192-92.771c-0.953-0.113-1.991-0.285-3.09-0.467
+      c-2.372-0.393-4.825-0.797-7.3-0.797c-9.82,0-12.445,6.898-13.136,11.012c-0.672,4-0.031,7.359,1.902,9.988
+      c3.252,4.422,8.974,5.207,13.57,5.836c1.347,0.186,2.618,0.359,3.682,0.598c43.048,9.619,57.543,24.742,64.627,67.424
+      c0.173,1.043,0.251,2.328,0.334,3.691c0.309,5.102,0.953,15.717,12.365,15.717h0.001c0.95,0,1.971-0.082,3.034-0.244
+      c10.627-1.615,10.294-11.318,10.134-15.98c-0.045-1.313-0.088-2.555,0.023-3.381C275.429,135.541,275.444,135.332,275.445,135.123z
+      "
+                      />
+                      <path
+                        id="XMLID_9_"
+                        d="M176.077,25.688c1.275,0.092,2.482,0.18,3.487,0.334c70.689,10.871,103.198,44.363,112.207,115.605
+      c0.153,1.211,0.177,2.688,0.202,4.252c0.09,5.566,0.275,17.145,12.71,17.385l0.386,0.004c3.9,0,7.002-1.176,9.221-3.498
+      c3.871-4.049,3.601-10.064,3.383-14.898c-0.053-1.186-0.104-2.303-0.091-3.281C318.481,68.729,255.411,2.658,182.614,0.201
+      c-0.302-0.01-0.59,0.006-0.881,0.047c-0.143,0.021-0.408,0.047-0.862,0.047c-0.726,0-1.619-0.063-2.566-0.127
+      C177.16,0.09,175.862,0,174.546,0c-11.593,0-13.797,8.24-14.079,13.152C159.817,24.504,170.799,25.303,176.077,25.688z"
+                      />
+                      <path
+                        id="XMLID_10_"
+                        d="M288.36,233.703c-1.503-1.148-3.057-2.336-4.512-3.508c-7.718-6.211-15.929-11.936-23.87-17.473
+      c-1.648-1.148-3.296-2.297-4.938-3.449c-10.172-7.145-19.317-10.617-27.957-10.617c-11.637,0-21.783,6.43-30.157,19.109
+      c-3.71,5.621-8.211,8.354-13.758,8.354c-3.28,0-7.007-0.936-11.076-2.783c-32.833-14.889-56.278-37.717-69.685-67.85
+      c-6.481-14.564-4.38-24.084,7.026-31.832c6.477-4.396,18.533-12.58,17.679-28.252c-0.967-17.797-40.235-71.346-56.78-77.428
+      c-7.005-2.576-14.365-2.6-21.915-0.06c-19.02,6.394-32.669,17.623-39.475,32.471C2.365,64.732,2.662,81.578,9.801,99.102
+      c20.638,50.666,49.654,94.84,86.245,131.293c35.816,35.684,79.837,64.914,130.839,86.875c4.597,1.978,9.419,3.057,12.94,3.844
+      c1.2,0.27,2.236,0.5,2.991,0.707c0.415,0.113,0.843,0.174,1.272,0.178l0.403,0.002c0.001,0,0,0,0.002,0
+      c23.988,0,52.791-21.92,61.637-46.91C313.88,253.209,299.73,242.393,288.36,233.703z"
+                      />
+                      <path
+                        id="XMLID_11_"
+                        d="M186.687,83.564c-4.107,0.104-12.654,0.316-15.653,9.021c-1.403,4.068-1.235,7.6,0.5,10.498
+      c2.546,4.252,7.424,5.555,11.861,6.27c16.091,2.582,24.355,11.48,26.008,28c0.768,7.703,5.955,13.082,12.615,13.082h0.001
+      c0.492,0,0.995-0.029,1.496-0.09c8.01-0.953,11.893-6.838,11.542-17.49c0.128-11.117-5.69-23.738-15.585-33.791
+      C209.543,88.98,197.574,83.301,186.687,83.564z"
+                      />
+                    </g>
                   </svg>
                 </a>
               </div>
@@ -1053,7 +1085,7 @@
         </div>
       </div>
     </section>
-    <footer class="text-center text-gray-500 dark:text-gray-400 mt-12 p-4">
+    <footer class="text-center text-gray-500 dark:text-gray-400 p-4">
       &copy; <span id="year"></span> UTC IT Solution. All rights reserved.
     </footer>
 
@@ -1063,10 +1095,10 @@
 
     <script>
       // Fire-and-forget visit tracking with path
-      fetch('/api/analytics/visit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ path: location.pathname || '/' })
+      fetch("/api/analytics/visit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ path: location.pathname || "/" }),
       }).catch(() => {});
 
       async function loadContactInfo() {
@@ -1075,12 +1107,12 @@
           let response;
           try {
             response = await fetch("/api/admin/contact");
-            if (!response.ok) throw new Error('API not available');
+            if (!response.ok) throw new Error("API not available");
           } catch (apiError) {
-            console.log('API not available, using JSON file');
+            console.log("API not available, using JSON file");
             response = await fetch("/data/contact.json");
           }
-          
+
           const contact = await response.json();
 
           // Address
@@ -1091,20 +1123,24 @@
           document.getElementById("contact-email").textContent = contact.email;
 
           // Phone (join multiple numbers with commas)
-          document.getElementById("contact-phone").textContent =
-            contact.phone.join(", ");
+          document.getElementById("contact-phone").textContent = Object.values(
+            contact.phone
+          ).join(", ");
 
           // Social links
           if (contact.social.facebook) {
             document.getElementById("facebook-link").href =
               contact.social.facebook;
           }
-          if (contact.social.twitter) {
-            document.getElementById("twitter-link").href =
-              contact.social.twitter;
+          if (contact.social.youtube) {
+            document.getElementById("youtube-link").href =
+              contact.social.youtube;
           }
           if (contact.social.tiktok) {
             document.getElementById("tiktok-link").href = contact.social.tiktok;
+          }
+          if (contact.social.viber) {
+            document.getElementById("viber-link").href = contact.social.viber;
           }
         } catch (error) {
           console.error("Error loading contact info:", error);
@@ -1140,23 +1176,24 @@
 
     <script>
       let services = [];
-      
+
       async function loadServices() {
         try {
           // Try API first, fallback to JSON file
           let response;
           try {
             response = await fetch("/api/admin/services");
-            if (!response.ok) throw new Error('API not available');
+            if (!response.ok) throw new Error("API not available");
           } catch (apiError) {
-            console.log('API not available, using JSON file');
+            console.log("API not available, using JSON file");
             response = await fetch("/data/services.json");
           }
-          
+
           services = await response.json();
           const serviceContainer = document.getElementById("service-container");
           if (!Array.isArray(services) || services.length === 0) {
-            serviceContainer.innerHTML = '<p class="text-center text-gray-500 dark:text-gray-400 py-8">No services available yet.</p>';
+            serviceContainer.innerHTML =
+              '<p class="text-center text-gray-500 dark:text-gray-400 py-8">No services available yet.</p>';
             return;
           }
           addServices();
@@ -1164,12 +1201,12 @@
           console.error("Error fetching services:", error);
         }
       }
-      
+
       loadServices();
 
       function addServices() {
         const serviceContainer = document.getElementById("service-container");
-        serviceContainer.innerHTML = '';
+        serviceContainer.innerHTML = "";
         services.forEach((service, i) => {
           const serviceCard = document.createElement("div");
           serviceCard.className =
@@ -1242,7 +1279,7 @@
       ${
         service.outlines
           ? `<ul class="space-y-3 text-gray-600 dark:text-gray-300">
-              ${service.outlines
+              ${Object.values(service.outlines)
                 .map(
                   (outline) => `
                   <li class="flex items-center gap-3">
@@ -1372,19 +1409,20 @@
           let response;
           try {
             response = await fetch("/api/admin/courses");
-            if (!response.ok) throw new Error('API not available');
+            if (!response.ok) throw new Error("API not available");
           } catch (apiError) {
-            console.log('API not available, using JSON file');
+            console.log("API not available, using JSON file");
             response = await fetch("/data/courses.json");
           }
-          
+
           const courses = await response.json();
 
           const container = document.getElementById("courses-container");
           const no_course = document.getElementById("no-course-container");
 
           if (!Array.isArray(courses) || courses.length === 0) {
-            no_course.innerHTML = '<p class="text-center text-gray-500 dark:text-gray-400 py-8 w-full">No courses available yet.</p>';
+            no_course.innerHTML =
+              '<p class="text-center text-gray-500 dark:text-gray-400 py-8 w-full">No courses available yet.</p>';
             return;
           }
 
@@ -1394,13 +1432,15 @@
               .map(
                 (item) => `
               <li class="flex items-center text-gray-900 dark:text-white">
-                <svg class="w-6 h-6 mr-2 text-green-500" fill="none" stroke="currentColor"
-                  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z">
-                  </path>
-                </svg>
-                ${item}
+                <span>
+                  <svg class="w-6 h-6 mr-3 text-green-500" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z">
+                    </path>
+                  </svg>
+                </span>
+                <span>${item}</span>
               </li>
             `
               )
@@ -1434,17 +1474,17 @@
               <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                 ${course.title}
               </h3>
-              <div class="flex items-center justify-end gap-3">
+              <div class="flex items-center justify-start md:justify-end gap-3">
                 <a href="#contact">
                   <button
-                    class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition duration-300 transform hover:-translate-y-1"
+                    class="cursor-pointer px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition duration-300 transform hover:-translate-y-1"
                   >
                     Enroll Now
                   </button>
                 </a>
                 <button
                   onclick="showModal('${course.id}')"
-                  class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition duration-300 transform hover:-translate-y-1"
+                  class="cursor-pointer px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition duration-300 transform hover:-translate-y-1"
                 >
                   See Details
                 </button>
@@ -1455,8 +1495,6 @@
 
             container.innerHTML += courseCard;
           });
-
-          console.log("✅ Courses loaded:", courseContent);
         } catch (error) {
           console.error("Error loading courses:", error);
         }
