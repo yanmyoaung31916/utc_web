@@ -5,40 +5,47 @@ A comprehensive admin panel for managing UTC IT Solution website content with a 
 ## Features
 
 ### 🔐 **Authentication**
+
 - JWT-based secure authentication
 - Protected admin routes
 - Session management with localStorage
 
 ### 📊 **Dashboard**
+
 - Overview statistics (courses, services, media files)
 - Quick action buttons
 - Real-time data updates
 
 ### 🎓 **Course Management**
+
 - Create, edit, and delete courses
 - Course outlines management
 - Image upload and management
 - Course level categorization
 
 ### ⚙️ **Service Management**
+
 - Full CRUD operations for services
 - Multiple image support per service
 - Service descriptions and outlines
 - Professional service presentation
 
 ### 📞 **Contact Management**
+
 - Update company information
 - Manage phone numbers and addresses
 - Social media links management
 - Real-time contact info updates
 
 ### 🖼️ **Media Library**
+
 - Upload multiple images
 - Image preview and management
 - Copy image URLs to clipboard
 - File deletion with confirmation
 
 ### 🎨 **Beautiful UI**
+
 - Modern Tailwind CSS design
 - Responsive mobile-first layout
 - Dark/light mode support
@@ -49,6 +56,7 @@ A comprehensive admin panel for managing UTC IT Solution website content with a 
 ## Technology Stack
 
 ### Backend
+
 - **Node.js** with Express.js
 - **JWT** for authentication
 - **Multer** for file uploads
@@ -58,6 +66,7 @@ A comprehensive admin panel for managing UTC IT Solution website content with a 
 - **Rate Limiting** for API protection
 
 ### Frontend
+
 - **Vanilla JavaScript** (ES6+)
 - **Tailwind CSS** for styling
 - **Font Awesome** for icons
@@ -98,16 +107,28 @@ ADMIN_PASSWORD=admin123
 # File Upload Configuration
 MAX_FILE_SIZE=5242880
 UPLOAD_PATH=./uploads
+
+SMTP_HOST=
+SMTP_PORT=465
+SMTP_SECURE=true
+FROM_EMAIL=
+FROM_NAME=Universal Technology
+SMTP_USER=
+SMTP_PASS=
+FROM_NAME=UTC Website
+
 ```
 
 ### 3. Start the Server
 
 For development:
+
 ```bash
 npm run dev
 ```
 
 For production:
+
 ```bash
 npm start
 ```
@@ -128,11 +149,13 @@ npm start
 ## API Endpoints
 
 ### Authentication
+
 - `POST /api/auth/login` - Admin login
 - `GET /api/auth/verify` - Verify token
 - `POST /api/auth/logout` - Logout
 
 ### Courses Management
+
 - `GET /api/admin/courses` - Get all courses
 - `GET /api/admin/courses/:id` - Get single course
 - `POST /api/admin/courses` - Create new course
@@ -140,6 +163,7 @@ npm start
 - `DELETE /api/admin/courses/:id` - Delete course
 
 ### Services Management
+
 - `GET /api/admin/services` - Get all services
 - `GET /api/admin/services/:id` - Get single service
 - `POST /api/admin/services` - Create new service
@@ -147,10 +171,12 @@ npm start
 - `DELETE /api/admin/services/:id` - Delete service
 
 ### Contact Management
+
 - `GET /api/admin/contact` - Get contact info
 - `PUT /api/admin/contact` - Update contact info
 
 ### File Upload
+
 - `POST /api/upload/single` - Upload single file
 - `POST /api/upload/multiple` - Upload multiple files
 - `GET /api/upload/files` - List all files
@@ -182,28 +208,33 @@ UTC/
 ## Usage Guide
 
 ### 1. Login to Admin Panel
+
 - Navigate to `/admin`
 - Use your admin credentials
 - Access the dashboard
 
 ### 2. Manage Courses
+
 - Click "Courses" in the sidebar
 - Add new courses with titles, levels, and outlines
 - Upload course images
 - Edit or delete existing courses
 
 ### 3. Manage Services
+
 - Click "Services" in the sidebar
 - Add services with descriptions and multiple images
 - Include service outlines
 - Update or remove services
 
 ### 4. Update Contact Information
+
 - Click "Contact Info" in the sidebar
 - Update company details, phone numbers, and social media links
 - Changes reflect immediately on the main website
 
 ### 5. Media Management
+
 - Click "Media Library" in the sidebar
 - Upload multiple images at once
 - Copy image URLs for use in courses/services
@@ -303,6 +334,7 @@ MIT License - see LICENSE file for details
 ## Support
 
 For support and questions:
+
 - Email: info@utcitsolution.com
 - Website: http://localhost:3000
 
