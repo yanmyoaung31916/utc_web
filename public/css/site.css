@@ -1,0 +1,15 @@
+/* Public site extras. Extracted from the inline <style> in index.html. */
+.lazy-loading {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+section.lazy-loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.modal-transition {
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}

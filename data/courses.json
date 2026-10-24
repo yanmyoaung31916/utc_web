@@ -1,0 +1,40 @@
+[
+  {
+    "id": "1758731125267",
+    "title": "Computer Basic Course",
+    "level": "Basic",
+    "image": "/uploads/image-1758732433743-805674995.jpg",
+    "alt": "Computer Basic Course",
+    "outlines": [
+      "Introduction To Computer System",
+      "Using Mouse & Keyboard",
+      "Using Windows 10",
+      "English and Myanmar Typing",
+      "Microsoft Word",
+      "Microsoft Excel",
+      "Microsoft PowerPoint",
+      "Using Internet and E-mail"
+    ]
+  },
+  {
+    "id": "1758731173704",
+    "title": "Network Essential Course",
+    "level": "Network",
+    "image": "/uploads/image-1758732570261-570216542.png",
+    "alt": "Network Essential Course",
+    "outlines": [
+      "Digital fundamentals & basic hardware knowledge",
+      "Network topologies",
+      "TCP/IP protocols & OSI layers",
+      "Structured cabling & wireless networking",
+      "IP subnetting & addressing",
+      "Networking media, device, & LAN design",
+      "Managing DHCP, DNS & RDC",
+      "Configuring & administering Ms Domain network",
+      "Managing public & shared folders",
+      "User account management",
+      "NTFS security & managing shared resources",
+      "Cloud storage integration"
+    ]
+  }
+]

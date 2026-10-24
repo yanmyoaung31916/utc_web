@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+
+# Environment (contains live secrets - never commit)
+.env
+
+# Runtime data
+database.db
+uploads/
+yma/
+*.log
+*.testbak
+
+# OS
+.DS_Store
+Thumbs.db
